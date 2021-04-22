@@ -6,10 +6,10 @@ currently can only add items to database thru postman and front is not functiona
 
 to test, first go to ./server/ folder and run
 
-# sudo docker-compose build
-# sudo docker-compose up
+### sudo docker-compose build
+### sudo docker-compose up
 
 then go to ./client/ folder and run
 
-# npm install
-# npm start
+### npm install
+### npm start
