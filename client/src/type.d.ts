@@ -36,3 +36,7 @@ type ApiDataTypeAttempt = {
     status: string
     attempt: IAttempt
 }
+
+type QuizProps = {
+    quiz: IQuiz
+}

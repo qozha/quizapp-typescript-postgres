@@ -1,12 +1,13 @@
+import { lighten } from '@material-ui/core'
 import React, { useEffect,  useState} from 'react'
+import { Link } from 'react-router-dom'
 
 type Props = QuizProps & {
     // updateTodo: (todo: ITodo) => void
     // deleteTodo: (id: string) => void
-    startQuiz: (id: string) =>void
 }
 
-const QuizItem: React.FC<Props> = ({ quiz, startQuiz}) => {
+const QuizItem: React.FC<Props> = ({ quiz}) => {
     const checkTodo: string = ''
     return (
       <div className='Card'>
@@ -14,14 +15,12 @@ const QuizItem: React.FC<Props> = ({ quiz, startQuiz}) => {
           <h3 className={checkTodo}>Quiz name: {quiz.quizname}</h3>
           <h4 className={checkTodo}> id: {quiz.id}</h4>
         </div>
-        <div className='Card--button'>
-          {<button
-            onClick={() => startQuiz(quiz.id)}
-            className={'Card--button__done'}
+        <li className='Card--button'>
+          {<Link to = {`/quiz/:${quiz.id}`}
           >
             Take
-          </button>}
-        </div>
+          </Link>}
+        </li>
       </div>
     )
   }
