@@ -1,6 +1,7 @@
 import { Question } from "../models";
 import {getRepository} from "typeorm";
 import {Quiz} from '../models';
+import { Answer } from "src/models/asnwer";
 
 export interface IQuizPayload {
     quizname: string;
@@ -9,12 +10,12 @@ export interface IQuizPayload {
 
 export interface IQuestionPayload{
     question: string;
-    answers: string[];
-    correctAnswer: number;
+    answers: Answer[];
 }
 
 export const getQuizzes = async() :Promise<Array<Quiz>> => {
     const quizRepository = getRepository(Quiz);
+    console.log("getting quizzes")
     return quizRepository.find();
 }
 
@@ -49,6 +50,8 @@ export const deleteQuiz = async (id: number) :Promise<Quiz | null> =>{
 export const addQuestiontoQuiz = async (id: number, payload: IQuestionPayload):Promise<Quiz | null> => {
     const quizRepository = getRepository(Quiz);
     const quiz = await quizRepository.findOne({id: id});
+
+    console.log(quiz?.quizname);
 
     if(!quiz) return null;
 

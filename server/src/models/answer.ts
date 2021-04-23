@@ -1,15 +1,14 @@
 import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany, UpdateDateColumn} from "typeorm";
-import { Answer } from "./asnwer";
 
 @Entity()
-export class Question{
+export class Answer{
 
     @PrimaryGeneratedColumn()
     id!: number;
 
     @Column()
-    question!: string;
+    answer!: string;
 
-    @Column("json")
-    answers!: Answer[];
+    @Column()
+    isCorrect!: boolean;
 }

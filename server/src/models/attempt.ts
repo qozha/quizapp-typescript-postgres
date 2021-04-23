@@ -1,4 +1,5 @@
 import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import { Answer } from "./asnwer";
 import {Quiz} from './index'
 
 
@@ -12,7 +13,7 @@ export class Attempt{
     quizID!: number;
 
     @Column("json")
-    submittedAnswers!: number[];
+    submittedAnswers!: Answer[];
 
     @Column()
     score!: number;

@@ -6,17 +6,17 @@ import { createAttempt, getAttempt, getAttempts, IAttemptPayload } from '../repo
 @Tags("Attempt")
 export default class QuizController{
 
-    @Get("/")
+    @Get("/attempts")
     public async getAttempts(): Promise<Array<Attempt>> {
         return getAttempts();
     }
 
-    @Get("/:id")
+    @Get("/attempts/:id")
     public async getAttempt(@Path() id: string): Promise<Attempt | null>{
         return getAttempt(Number(id));
     }
 
-    @Post("/")
+    @Post("/attempts")
     public async createAttempt(@Body() body : IAttemptPayload): Promise<Attempt> {
         return createAttempt(body);
     }

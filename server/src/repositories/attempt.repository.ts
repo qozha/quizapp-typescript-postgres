@@ -1,11 +1,12 @@
 import config from "src/config/database";
+import { Answer } from "src/models/asnwer";
 import {getRepository} from "typeorm";
 import {Attempt, Quiz, Question} from '../models';
 
 
 export interface IAttemptPayload {
     quizID: number;
-    submittedAnswers: number[];
+    submittedAnswers: Answer[];
     score: number;
 }
 
@@ -17,7 +18,7 @@ export const createAttempt = async(payload: IAttemptPayload): Promise<Attempt> =
     var i = 0;
     var score = 0;
     payload.submittedAnswers.forEach(element => {
-        element == quiz?.questions[i].correctAnswer ? score++ : score;
+        element.isCorrect ? score++ : score;
         i = i + 1;
     });
 

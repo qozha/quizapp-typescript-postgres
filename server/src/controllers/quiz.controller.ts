@@ -28,6 +28,7 @@ export default class QuizController{
 
     @Put("/:id")
     public async addQuestiontoQuiz(@Path() id:string, @Body() body: IQuestionPayload) : Promise<Quiz | null>{
+        console.log(body)
         return addQuestiontoQuiz(Number(id), body);
     }
 
