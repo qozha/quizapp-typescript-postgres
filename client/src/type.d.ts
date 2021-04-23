@@ -40,3 +40,11 @@ type ApiDataTypeAttempt = {
 type QuizProps = {
     quiz: IQuiz
 }
+
+type QuestionProps = {
+    question: IQuestion
+}
+
+type AnswerProps = {
+    answer: string
+}

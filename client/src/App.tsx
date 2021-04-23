@@ -3,6 +3,7 @@ import QuizItem from './components/QuizItem'
 import {getQuizzes, getQuiz, addAttempt} from './API'
 import {Route, Switch, Link} from 'react-router-dom'
 import TakeQuiz from './components/TakeQuiz'
+import QuizList from './components/QuizList'
 
 const App:React.FC = ():React.ReactElement => {
   const [quizzes, setQuizzes] = useState<IQuiz[]>([])
@@ -20,18 +21,10 @@ const App:React.FC = ():React.ReactElement => {
 
   console.log("take?")
   return(
-    <main className='App'>
-      <h1>Take a quiz</h1>
-      {
-        quizzes.map((quiz) => <QuizItem 
-        quiz={quiz}
-        />)
-      }
-      
       <Switch>
-        <Route path="/edit/:id" component={TakeQuiz}/>
+        <Route exact path = "/"><QuizList/></Route>
+        <Route path="/quiz/:id"><TakeQuiz></TakeQuiz></Route>
       </Switch>
-    </main>
   )
 
 

@@ -8,6 +8,7 @@ type Props = QuizProps & {
 }
 
 const QuizItem: React.FC<Props> = ({ quiz}) => {
+
     const checkTodo: string = ''
     return (
       <div className='Card'>
@@ -16,7 +17,7 @@ const QuizItem: React.FC<Props> = ({ quiz}) => {
           <h4 className={checkTodo}> id: {quiz.id}</h4>
         </div>
         <li className='Card--button'>
-          {<Link to = {`/quiz/:${quiz.id}`}
+          {<Link to = {`/quiz/${quiz.id}`}
           >
             Take
           </Link>}
