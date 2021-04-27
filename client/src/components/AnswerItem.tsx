@@ -1,13 +1,6 @@
-import { lighten } from '@material-ui/core'
-import React, { useEffect,  useState} from 'react'
-import { Link } from 'react-router-dom'
+import React, { } from 'react'
 
-type Props = AnswerProps & {
-    // updateTodo: (todo: ITodo) => void
-    // deleteTodo: (id: string) => void
-}
-
-const QuizItem: React.FC<Props> = ({ answer }) => {
+const QuizItem: React.FC<AnswerProps> = ({ answer }) => {
 
     const checkTodo: string = ''
     return (

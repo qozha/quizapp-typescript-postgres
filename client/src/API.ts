@@ -20,14 +20,14 @@ export const getQuiz = async(id:string) => {
     }
     catch(error) {
         console.log(error);
-    }
+    } 
 }
 
-export const addAttempt = async(formData: IAttempt): Promise<AxiosResponse<ApiDataTypeAttempt>> => {
+export const createAttempt = async(quizID: number): Promise<AxiosResponse<ApiDataTypeAttempt>> => {
     try {
         const attempt: Omit<IAttempt, 'id'> = {
-            quizID: formData.quizID,
-            submittedAnswers: formData.submittedAnswers,
+            quizID: quizID,
+            questionAttempts: [],
             score: 0
         }
         console.log(attempt.quizID)
@@ -37,6 +37,23 @@ export const addAttempt = async(formData: IAttempt): Promise<AxiosResponse<ApiDa
                 `${baseUrl}/attempts`, attempt
             ) 
         return addedAttempt;
+    } catch(error) {
+        throw new Error(error);
+    }
+}
+
+export const updateQuestionAttempt = async(attemptID: string, formData: IQuestionAttempt): Promise<AxiosResponse<ApiDataTypeAttempt>> => {
+    try {
+        const attempt: Omit<IQuestionAttempt, 'id'> = {
+            questionID: formData.questionID,
+            answer: formData.answer
+        }
+
+        const updatedAttempt: AxiosResponse<ApiDataTypeAttempt> = 
+            await axios.put(
+                `${baseUrl}/attempts/${attemptID}`, attempt
+            ) 
+        return updatedAttempt;
     } catch(error) {
         throw new Error(error);
     }

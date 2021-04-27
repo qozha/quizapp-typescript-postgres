@@ -4,18 +4,28 @@ interface IQuiz {
     questions: IQuestion[]
 }
 
+interface IQuestionAttempt{
+    questionID: number,
+    answer: IAnswer
+}
+
 interface IAttempt {
     id: number
-    quizID: number
-    submittedAnswers: number[]
-    score: number
+    quizID: number;
+    questionAttempts: IQuestionAttempt[];
+    score: number;
 }
 
 interface IQuestion {
     id: string
     question: string
-    answers: string[]
-    correctAnswer: string
+    answers: IAnswer[]
+}
+
+interface IAnswer {
+    id: string
+    answer: string
+    isCorrect: boolean
 }
 
 type ApiDataTypeQ = {
@@ -32,9 +42,10 @@ type ApiDataTypeQSingle = {
 }
 
 type ApiDataTypeAttempt = {
-    message: string
-    status: string
-    attempt: IAttempt
+    id: number
+    quizID: number;
+    questionAttempts: IQuestionAttempt[];
+    score: number;
 }
 
 type QuizProps = {
@@ -43,6 +54,7 @@ type QuizProps = {
 
 type QuestionProps = {
     question: IQuestion
+    attemptID: number
 }
 
 type AnswerProps = {

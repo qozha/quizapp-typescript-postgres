@@ -1,27 +1,52 @@
-import { lighten } from '@material-ui/core'
-import React, { useEffect,  useState} from 'react'
-import { Link } from 'react-router-dom'
-import AnswerItem from './AnswerItem'
+import React, { useState} from 'react'
+import { updateQuestionAttempt } from '../API'
 
 type Props = QuestionProps & {
-    // updateTodo: (todo: ITodo) => void
-    // deleteTodo: (id: string) => void
 }
 
-const QuizItem: React.FC<Props> = ({ question }) => {
 
-    const checkTodo: string = ''
-    return (
-        <div className='Card--text'>
-        <h4 className={checkTodo}> {question.question}</h4>
+const QuizItem: React.FC<Props> = ({ question, attemptID}) => {
 
-        {
-            question.answers.map((answer) => 
-                <AnswerItem answer = {answer}/>
-            )
-        }
-      </div>
-    )
-  }
+  const [checkBox, setCheckBox] = useState();
+
+
+  const handleInputChange = (answer: any) => {
+    console.log(answer)
+    const questionAttempt: IQuestionAttempt = {
+        questionID: Number(question.id),
+        answer: answer
+    }
+    updateQuestionAttempt(String(attemptID), questionAttempt)
+    setCheckBox(answer.answer);
+  };
+  
+
+  const checkTodo: string = ''
+  return (
+      <div className='Card--text'>
+      <h4 className={checkTodo}> {question.question}</h4>
+      {
+          question.answers.map((answer) => 
+          <label key={answer.id}>
+          <div>
+            <input
+              type="radio"
+              value={checkBox}
+              name={question.id}
+              onChange={e => {
+                // setAnswer(answer.id)
+                handleInputChange(answer)
+              }}
+              checked={answer.answer === checkBox}
+              key = {answer.id}
+            />
+            {answer.answer}
+          </div>
+        </label>
+          )
+      }
+    </div>
+  )
+}
 
 export default QuizItem

@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import QuizItem from './QuizItem'
-import {getQuizzes, getQuiz, addAttempt} from '../API'
-import {Route, Switch, Link, BrowserRouter} from 'react-router-dom'
-import TakeQuiz from './TakeQuiz'
+import {getQuizzes} from '../API'
 
 const QuizList:React.FC = ():React.ReactElement => {
     const [quizzes, setQuizzes] = useState<IQuiz[]>([])
@@ -21,7 +19,7 @@ const QuizList:React.FC = ():React.ReactElement => {
           <h1>Take a quiz</h1>
           {
             quizzes.map((quiz) => <QuizItem 
-            quiz={quiz}
+            quiz={quiz} key={quiz.id}
             />)
           }
         </main>

@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import QuizItem from './components/QuizItem'
-import {getQuizzes, getQuiz, addAttempt} from './API'
-import {Route, Switch, Link} from 'react-router-dom'
+import {getQuizzes} from './API'
+import {Route, Switch, BrowserRouter} from 'react-router-dom'
 import TakeQuiz from './components/TakeQuiz'
 import QuizList from './components/QuizList'
 
@@ -21,10 +20,12 @@ const App:React.FC = ():React.ReactElement => {
 
   console.log("take?")
   return(
+    <BrowserRouter>
       <Switch>
         <Route exact path = "/"><QuizList/></Route>
         <Route path="/quiz/:id"><TakeQuiz></TakeQuiz></Route>
       </Switch>
+    </BrowserRouter>
   )
 
 
