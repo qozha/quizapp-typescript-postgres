@@ -26,10 +26,22 @@ export default class QuizController{
         return deleteQuiz(Number(id));
     }
 
+    // @Put("/:id")
+    // public async addQuestiontoQuiz(@Path() id:string, @Body() body: IQuestionPayload) : Promise<Quiz | null>{
+    //     console.log(body)
+    //     return addQuestiontoQuiz(Number(id), body);
+    // }
+
     @Put("/:id")
-    public async addQuestiontoQuiz(@Path() id:string, @Body() body: IQuestionPayload) : Promise<Quiz | null>{
+    public async addQuestionstoQuiz(@Path() id:string, @Body() body: IQuestionPayload[]) : Promise<Quiz | null>{
         console.log(body)
-        return addQuestiontoQuiz(Number(id), body);
+
+        body.forEach(IQuestion => {
+            addQuestiontoQuiz(Number(id), IQuestion)
+        });
+
+        return getQuiz(Number(id));
     }
+
 
 }

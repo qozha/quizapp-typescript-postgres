@@ -1,7 +1,7 @@
 import { Question } from "../models";
 import {getRepository} from "typeorm";
 import {Quiz} from '../models';
-import { Answer } from "src/models/asnwer";
+import { Answer } from "src/models/answer";
 
 export interface IQuizPayload {
     quizname: string;
@@ -57,8 +57,14 @@ export const addQuestiontoQuiz = async (id: number, payload: IQuestionPayload):P
 
     const question = new Question();
 
-    quiz.questions.push({...question, ...payload});
+    const questionRepository = getRepository(Question);
+
+    const q = questionRepository.save({
+        ...question,
+        ...payload
+    })
+
+    quiz.questions.push(await q);
 
     return quizRepository.save(quiz);
-
 } 

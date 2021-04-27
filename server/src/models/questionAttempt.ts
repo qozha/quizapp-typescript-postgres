@@ -2,14 +2,11 @@ import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany, Upd
 import { Answer } from "./answer";
 
 @Entity()
-export class Question{
-
-    @PrimaryGeneratedColumn()
-    id!: number;
+export class QuestionAttempt{
 
     @Column()
-    question!: string;
+    questionID!: number;
 
     @Column("json")
-    answers!: Answer[];
+    answer!: Answer;
 }

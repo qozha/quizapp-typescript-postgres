@@ -36,7 +36,7 @@ router.delete("/:id", async(req, res) => {
 
 router.put("/:id", async (req, res)=> {
     const controller = new QuizController();
-    const response = await controller.addQuestiontoQuiz(req.params.id, req.body);
+    const response = await controller.addQuestionstoQuiz(req.params.id, req.body);
 
     if(!response) res.status(404).send({message: "No quiz found"})
 
