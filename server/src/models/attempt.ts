@@ -19,6 +19,9 @@ export class Attempt{
     @Column()
     score!: number;
 
+    @Column()
+    username?: string;
+
 }
 
 

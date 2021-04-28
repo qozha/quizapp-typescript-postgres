@@ -4,7 +4,7 @@ import { getQuiz, createAttempt } from '../API';
 import QuestionItem from './QuestionItem';
 
 
-const TakeQuiz:React.FC = ():React.ReactElement =>{
+const TakeQuiz:React.FC<Username> = ({username}):React.ReactElement =>{
 
 const [quiz, setQuiz] = useState<IQuiz>()
 
@@ -21,7 +21,7 @@ const getQuizE = () => {
 const handleAttemptCreate = async (quizID: number) => { 
   if(quizID) {
     console.log("why")
-    await createAttempt(quizID).then((res:any) => setAttemptID(res.data.id)).catch((err) => console.log(err))
+    await createAttempt(quizID, username).then((res:any) => setAttemptID(res.data.id)).catch((err) => console.log(err))
   }
 }
 
@@ -35,6 +35,8 @@ if(!quiz)getQuizE();
 if(!AttemptID) handleAttemptCreate(Number(quiz?.id))
 
 const Button = withRouter(({ history }) => (
+
+
   <button
     type='button'
     onClick={() => { handleSubmit(); history.push('/') }}

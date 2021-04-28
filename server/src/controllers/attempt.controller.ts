@@ -1,6 +1,6 @@
-import { Get, Route, Tags,  Post, Body, Path, Delete, Put } from "tsoa";
+import { Get, Route, Tags,  Post, Body, Path, Delete, Put, Patch } from "tsoa";
 import {Attempt} from '../models'
-import { createAttempt, deleteAttempt, getAttempt, getAttempts, IAttemptPayload, IQuestionAttemptPayload, updateAttempt, deleteAllAttempts } from '../repositories/attempt.repository';
+import { createAttempt, deleteAttempt, getAttempt, getAttempts, IAttemptPayload, IQuestionAttemptPayload, updateAttempt, deleteAllAttempts, getQuizAttempts } from '../repositories/attempt.repository';
 
 @Route("attempts")
 @Tags("Attempt")
@@ -19,6 +19,11 @@ export default class QuizController{
         return getAttempt(Number(id));
     }
 
+    @Get("/attempts/quiz/:id")
+    public async getQuizAttempts(@Path() id: string): Promise<Array<Attempt> | null>{
+        return getQuizAttempts(Number(id));
+    }
+
     @Post("/attempts")
     public async createAttempt(@Body() body : IAttemptPayload): Promise<Attempt> {
         return createAttempt(body);
@@ -33,4 +38,5 @@ export default class QuizController{
     public async deleteAttempt(@Path() id: string): Promise<Attempt | null> {
         return deleteAttempt(Number(id))
     }
+
 }

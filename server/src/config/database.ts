@@ -1,5 +1,5 @@
 import {ConnectionOptions} from 'typeorm';
-import {Attempt, Question, Quiz, Answer} from '../models';
+import {Attempt, Question, Quiz, Answer, User} from '../models';
 
 
 const config: ConnectionOptions = {

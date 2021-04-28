@@ -37,7 +37,9 @@ export default class QuizController{
         console.log(body)
 
         body.forEach(IQuestion => {
-            addQuestiontoQuiz(Number(id), IQuestion)
+            const k = addQuestiontoQuiz(Number(id), IQuestion)
+            while(!k){
+            }
         });
 
         return getQuiz(Number(id));

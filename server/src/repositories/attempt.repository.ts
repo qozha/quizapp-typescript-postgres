@@ -1,4 +1,3 @@
-import config from "src/config/database";
 import { Answer } from "src/models/answer";
 import {getRepository} from "typeorm";
 import {Attempt, Quiz, Question, QuestionAttempt} from '../models';
@@ -8,6 +7,7 @@ export interface IAttemptPayload {
     quizID: number;
     questionAttempts: QuestionAttempt[];
     score: number;
+    username: string;
 }
 
 export interface IQuestionAttemptPayload{
@@ -19,15 +19,6 @@ export const createAttempt = async(payload: IAttemptPayload): Promise<Attempt> =
     const quizRepository = getRepository(Quiz);
     const attemptRepository = getRepository(Attempt);
     const quiz = await quizRepository.findOne({id: payload.quizID});
-
-    var i = 0;
-    var score = 0;
-    payload.questionAttempts.forEach(element => {
-        element.answer.isCorrect ? score++ : score;
-        i = i + 1;
-    });
-
-    payload.score = score;
 
     const attempt = new Attempt();
     
@@ -62,6 +53,16 @@ export const getAttempt = async(id: number): Promise<Attempt | null> =>{
     return attempt;
 }
 
+export const getQuizAttempts = async(id: number): Promise<Array<Attempt> | null> =>{
+    const attemptRepository = getRepository(Attempt);
+
+    const attempt = await attemptRepository.find({quizID: id});
+
+    if(!attempt) return null;
+    return attempt;
+}
+
+
 export const updateAttempt = async(id: number, payload: IQuestionAttemptPayload): Promise<Attempt | null> => {
     const attemptRepository = getRepository(Attempt);
 
@@ -82,8 +83,13 @@ export const updateAttempt = async(id: number, payload: IQuestionAttemptPayload)
 
     questionAttempts.push(questionAttempt)
 
+    let score = 0
 
-    return attemptRepository.save({id: id,quizID: attempt.quizID,questionAttempts: questionAttempts});
+    questionAttempts.forEach(element => {
+        element.answer.isCorrect ? score++ : score
+    });
+
+    return attemptRepository.save({id: id,quizID: attempt.quizID,questionAttempts: questionAttempts, score: score});
 }
 
 export const deleteAllAttempts = async(): Promise<void> => {

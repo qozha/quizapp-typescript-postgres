@@ -26,8 +26,8 @@ const QuizItem: React.FC<Props> = ({ question, attemptID}) => {
       <div className='Card--text'>
       <h4 className={checkTodo}> {question.question}</h4>
       {
-          question.answers.map((answer) => 
-          <label key={answer.id}>
+        question.answers.map((answer) => 
+        <label>
           <div>
             <input
               type="radio"
@@ -38,7 +38,7 @@ const QuizItem: React.FC<Props> = ({ question, attemptID}) => {
                 handleInputChange(answer)
               }}
               checked={answer.answer === checkBox}
-              key = {answer.id}
+              // key = {answer.id}
             />
             {answer.answer}
           </div>

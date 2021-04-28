@@ -14,6 +14,7 @@ interface IAttempt {
     quizID: number;
     questionAttempts: IQuestionAttempt[];
     score: number;
+    username: string;
 }
 
 interface IQuestion {
@@ -46,6 +47,7 @@ type ApiDataTypeAttempt = {
     quizID: number;
     questionAttempts: IQuestionAttempt[];
     score: number;
+    username: string;
 }
 
 type QuizProps = {
@@ -59,4 +61,12 @@ type QuestionProps = {
 
 type AnswerProps = {
     answer: string
+}
+
+type Username = {
+    username: string
+}
+
+interface IUsername {
+    username: string
 }

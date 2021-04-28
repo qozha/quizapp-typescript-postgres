@@ -1,8 +1,11 @@
 import React, { } from 'react'
 import { Link } from 'react-router-dom'
 
+type Props = QuizProps & { 
+  link: string
+}
 
-const QuizItem: React.FC<QuizProps> = ({ quiz}) => {
+const QuizItem: React.FC<Props> = ({ quiz, link}) => {
 
     const checkTodo: string = ''
     return (
@@ -12,9 +15,9 @@ const QuizItem: React.FC<QuizProps> = ({ quiz}) => {
           <h4 className={checkTodo}> id: {quiz.id}</h4>
         </div>
         <li className='Card--button'>
-          {<Link to = {`/quiz/${quiz.id}`}
+          {<Link to = {`/${link}/${quiz.id}`}
           >
-            Take
+            Choose
           </Link>}
         </li>
       </div>

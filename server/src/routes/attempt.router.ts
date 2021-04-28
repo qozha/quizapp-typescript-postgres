@@ -26,6 +26,14 @@ router.get("/:id", async(req, res) => {
     return res.send(response);
 })
 
+router.get("/quiz/:id", async(req, res) => {
+    const controller = new AttemptController();
+    const response = await controller.getQuizAttempts(req.params.id);
+    if(!response) res.status(404).send({message: "No attempts found"})
+
+    return res.send(response);
+})
+
 router.put("/:id", async(req, res)=> { // update attempt
     const controller = new AttemptController();
     const response = await controller.updateAttempt(req.params.id, req.body)
