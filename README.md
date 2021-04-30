@@ -2,7 +2,9 @@
 
 working on a quiz taking app 
 
-currently can only add items to database thru postman and front is not functional
+currently can only add items to database thru postman
+
+can take quizzes and see leaderboards
 
 to test, first go to ./server/ folder and run
 
